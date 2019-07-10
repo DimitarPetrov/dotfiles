@@ -38,7 +38,7 @@ HYPHEN_INSENSITIVE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -157,3 +157,7 @@ alias goland="/usr/local/bin/goland"
 
 alias smctll=sm-login.sh
 alias smctli="cd $GOPATH/src/github.com/Peripli/service-manager-cli && go build -o smctl && mv smctl $GOPATH/bin"
+
+alias work=work.sh
+alias nowork=stop_work.sh
+
