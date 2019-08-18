@@ -258,3 +258,7 @@ call expand_region#custom_text_objects('python', {
       \ 'ic' :1,
       \ })
 set encoding=utf-8
+
+"Disable Perl syntax in favor of Prolog
+au FileType perl set filetype=prolog
+

@@ -160,4 +160,5 @@ alias smctli="cd $GOPATH/src/github.com/Peripli/service-manager-cli && go build 
 
 alias work=work.sh
 alias nowork=stop_work.sh
-
+alias prolog="docker start rserve; docker start prolog"
+alias noprolog="docker stop prolog; docker stop rserve"
