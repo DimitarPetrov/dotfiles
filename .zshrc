@@ -77,6 +77,7 @@ plugins=(
   vi-mode
   cf
   z
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
