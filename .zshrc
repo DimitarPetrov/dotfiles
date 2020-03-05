@@ -111,6 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Extend file descriptors count for this terminal session
+ulimit -n 1024
+
 # Git aliases:
 alias gc="git clone"
 alias gs="git status"
@@ -161,5 +164,12 @@ alias smctli="cd $GOPATH/src/github.com/Peripli/service-manager-cli && go build 
 
 alias work=work.sh
 alias nowork=stop_work.sh
+
 alias prolog="docker start rserve; docker start prolog"
 alias noprolog="docker stop prolog; docker stop rserve"
+
+alias docker-clean='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias gotest='go test -race -p 1 -count 1 ./...'
+
+# added by travis gem
+[ -f /Users/i356426/.travis/travis.sh ] && source /Users/i356426/.travis/travis.sh
