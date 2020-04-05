@@ -251,12 +251,6 @@ call vundle#end()
 
 colorscheme ir_black
 
-call expand_region#custom_text_objects('python', {
-      \ 'af' :1,
-      \ 'if' :1,
-      \ 'ac' :1,
-      \ 'ic' :1,
-      \ })
 set encoding=utf-8
 
 "Disable Perl syntax in favor of Prolog
