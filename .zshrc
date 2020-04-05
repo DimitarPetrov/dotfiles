@@ -2,10 +2,10 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/i356426/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 export ANDROID_SDK=$HOME/Library/Android/sdk
 export GOPATH=$HOME/go
-export PATH=$PATH:/Users/i356426/Library/Python/2.7/bin:/Users/i356426/go/bin:~/Documents/scripts:~/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
+export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -170,6 +170,13 @@ alias noprolog="docker stop prolog; docker stop rserve"
 
 alias docker-clean='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias gotest='go test -race -p 1 -count 1 ./...'
+
+alias loc="countLoC.sh"
+alias loc-file-names="countLoC.sh tests print-files"
+alias loc-no-tests="countLoC.sh no-tests"
+alias loc-no-tests-file-names="countLoC.sh no-tests print-files"
+
+alias toolkit="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock --name toolkit dnpetrovv/toolkit"
 
 # added by travis gem
 [ -f /Users/i356426/.travis/travis.sh ] && source /Users/i356426/.travis/travis.sh
