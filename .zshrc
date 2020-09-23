@@ -4,8 +4,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
 export ANDROID_SDK=$HOME/Library/Android/sdk
+
+# Golang envs
 export GOPATH=$HOME/go
-export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
+export GOROOT=$HOME/go1.14.8
+export PATH=${HOME}/go1.14.8/bin:${PAHT}
+
+export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sm_login:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
+export PATH="$PATH:${HOME}/istio/bin"
+export LANDSCAPES_FOLDER=$HOME/landscapes
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -112,7 +119,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Extend file descriptors count for this terminal session
-ulimit -n 1024
+ulimit -n 2048
 
 # Git aliases:
 alias gc="git clone"
@@ -128,6 +135,10 @@ alias gf="git diff"
 alias gl="git log --graph --decorate --pretty=oneline --abbrev-commit --all"
 alias gira="git reset HEAD --hard"
 alias gb="git branch"
+
+# K8S aliases:
+alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
+alias kpwd="kubectl config view --minify --output 'jsonpath={..namespace}'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPS="--extended"
@@ -169,14 +180,35 @@ alias prolog="docker start rserve; docker start prolog"
 alias noprolog="docker stop prolog; docker stop rserve"
 
 alias docker-clean='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias gotest='go test -race -p 1 -count 1 ./...'
+alias gotest='go test -race -p 1 -timeout 30m -count 1 ./...'
 
 alias loc="countLoC.sh"
 alias loc-file-names="countLoC.sh tests print-files"
 alias loc-no-tests="countLoC.sh no-tests"
 alias loc-no-tests-file-names="countLoC.sh no-tests print-files"
 
-alias toolkit="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock --name toolkit dnpetrovv/toolkit"
+alias cmp-dev="kubectl config use-context gke_sap-cp-cmp-dev_europe-west1_sap-cp-cmp-dev"
+alias cmp-dev-testing="kubectl config use-context gke_sap-cp-cmp-dev_europe-west1-b_sap-cp-cmp-dev-testing"
+alias cmp-stage="kubectl config use-context gke_sap-cp-cmp-stage_europe-west1_sap-cp-cmp-stage"
+alias cmp-prod="kubectl config use-context gke_sap-cp-cmp-eu10-prod_europe-west1_sap-cp-cmp-prod"
 
+toolkit() {
+  docker run -it --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v ${PWD}:/root/go/src/${PWD##*/} \
+    -v ${HOME}/.kube:/root/.kube \
+    -v ${HOME}/Documents/scripts:/root/Documents/scripts \
+    -w /root/go/src/${PWD##*/} \
+    --name toolkit dnpetrovv/toolkit
+}
 # added by travis gem
 [ -f /Users/i356426/.travis/travis.sh ] && source /Users/i356426/.travis/travis.sh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/i356426/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/i356426/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
