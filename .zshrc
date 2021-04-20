@@ -1,17 +1,22 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
 export ANDROID_SDK=$HOME/Library/Android/sdk
 
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+
 # Golang envs
 export GOPATH=$HOME/go
-export GOROOT=$HOME/go1.14.8
-export PATH=${HOME}/go1.14.8/bin:${PAHT}
+export GOROOT=$HOME/go1.16.3
+export PATH="${HOME}/go1.16.3/bin:${PATH}"
 
 export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sm_login:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
 export PATH="$PATH:${HOME}/istio/bin"
+export PATH=$HOME/.gloo-mesh/bin:$PATH
 export LANDSCAPES_FOLDER=$HOME/landscapes
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -187,10 +192,13 @@ alias loc-file-names="countLoC.sh tests print-files"
 alias loc-no-tests="countLoC.sh no-tests"
 alias loc-no-tests-file-names="countLoC.sh no-tests print-files"
 
-alias cmp-dev="kubectl config use-context gke_sap-cp-cmp-dev_europe-west1_sap-cp-cmp-dev"
-alias cmp-dev-testing="kubectl config use-context gke_sap-cp-cmp-dev_europe-west1-b_sap-cp-cmp-dev-testing"
-alias cmp-stage="kubectl config use-context gke_sap-cp-cmp-stage_europe-west1_sap-cp-cmp-stage"
-alias cmp-prod="kubectl config use-context gke_sap-cp-cmp-eu10-prod_europe-west1_sap-cp-cmp-prod"
+alias cmp-dev="cmp-dev.sh"
+alias cmp-dev-testing="cmp-dev-testing.sh"
+alias cmp-stage="cmp-stage.sh"
+alias cmp-prod="cmp-prod.sh"
+
+alias l="/bin/ls"
+alias ls="logo-ls"
 
 toolkit() {
   docker run -it --rm \
