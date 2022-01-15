@@ -11,8 +11,8 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Hom
 
 # Golang envs
 export GOPATH=$HOME/go
-export GOROOT=$HOME/go1.16.3
-export PATH="${HOME}/go1.16.3/bin:${PATH}"
+export GOROOT=/usr/local/Cellar/go/1.17/libexec
+export PATH="/usr/local/Cellar/go/1.17/libexec/bin:${HOME}/go1.16.3/bin:${PATH}"
 
 export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sm_login:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
 export PATH="$PATH:${HOME}/istio/bin"
@@ -172,6 +172,11 @@ port() {
   lsof -i ":$1"
 }
 
+jwt() {
+    jq -R 'split(".") | .[0] | @base64d | fromjson' <<< "$1"
+    jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
+}
+
 alias dp="psql -h localhost -U postgres"
 alias goland="/usr/local/bin/goland"
 
@@ -220,3 +225,4 @@ if [ -f '/Users/i356426/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/opt/node@14/bin:$PATH"
