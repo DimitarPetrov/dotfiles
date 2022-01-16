@@ -7,17 +7,15 @@ export LC_ALL=en_US.UTF-8
 export ZSH="${HOME}/.oh-my-zsh"
 export ANDROID_SDK=$HOME/Library/Android/sdk
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+export JAVA_HOME=/Users/I356426/Library/Java/JavaVirtualMachines/corretto-11.0.13/Contents/Home
 
 # Golang envs
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/Cellar/go/1.17/libexec
-export PATH="/usr/local/Cellar/go/1.17/libexec/bin:${HOME}/go1.16.3/bin:${PATH}"
+export GOROOT=$HOME/go1.17.6/go1.17.6
+export PATH="${HOME}/go1.17.6/go1.17.6/bin:${PATH}"
 
-export PATH=$PATH:${HOME}/Library/Python/2.7/bin:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sm_login:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal:${HOME}/flutter/bin:$ANDROID_SDK/emulator:$ANDROID_SDK/tools
-export PATH="$PATH:${HOME}/istio/bin"
-export PATH=$HOME/.gloo-mesh/bin:$PATH
-export LANDSCAPES_FOLDER=$HOME/landscapes
+export PATH=$PATH:${HOME}/go/bin:${HOME}/Documents/scripts:${HOME}/Documents/scripts/sap:${HOME}/Documents/scripts/personal
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -87,9 +85,7 @@ plugins=(
   mvn
   web-search
   vi-mode
-  cf
   z
-  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -180,15 +176,6 @@ jwt() {
 alias dp="psql -h localhost -U postgres"
 alias goland="/usr/local/bin/goland"
 
-alias smctll=sm-login.sh
-alias smctli="cd $GOPATH/src/github.com/Peripli/service-manager-cli && go build -o smctl && mv smctl $GOPATH/bin"
-
-alias work=work.sh
-alias nowork=stop_work.sh
-
-alias prolog="docker start rserve; docker start prolog"
-alias noprolog="docker stop prolog; docker stop rserve"
-
 alias docker-clean='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias gotest='go test -race -p 1 -timeout 30m -count 1 ./...'
 
@@ -214,15 +201,18 @@ toolkit() {
     -w /root/go/src/${PWD##*/} \
     --name toolkit dnpetrovv/toolkit
 }
-# added by travis gem
-[ -f /Users/i356426/.travis/travis.sh ] && source /Users/i356426/.travis/travis.sh
-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export PATH="/opt/homebrew/opt/maven@3.5/bin:$PATH"
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/i356426/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/i356426/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/I356426/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/I356426/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/i356426/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="/usr/local/opt/node@14/bin:$PATH"
+if [ -f '/Users/I356426/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/I356426/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# K9S home
+export XDG_CONFIG_HOME=$HOME
+
